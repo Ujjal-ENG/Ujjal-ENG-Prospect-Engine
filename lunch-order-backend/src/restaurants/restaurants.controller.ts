@@ -16,13 +16,13 @@ export class RestaurantsController {
   constructor(private readonly restaurantsService: RestaurantsService) {}
 
   @Post()
-  create(@Body() createRestaurantDto: CreateRestaurantDto) {
-    return this.restaurantsService.create(createRestaurantDto);
+  async createRestaurant(@Body('name') name: string) {
+    return this.restaurantsService.createRestaurant(name);
   }
 
   @Get()
-  findAll() {
-    return this.restaurantsService.findAll();
+  async getRestaurants() {
+    return this.restaurantsService.getAllRestaurants();
   }
 
   @Get(':id')

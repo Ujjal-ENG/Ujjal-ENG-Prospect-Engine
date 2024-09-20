@@ -1,15 +1,16 @@
+// src/app.module.ts
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { RestaurantsModule } from './restaurants/restaurants.module';
-import { VotesModule } from './votes/votes.module';
-import { VotesModule } from './votes/votes.module';
+import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from './prisma/prisma.module';
 import { RestaurantsModule } from './restaurants/restaurants.module';
+import { VotesModule } from './votes/votes.module';
 
 @Module({
-  imports: [RestaurantsModule, VotesModule, PrismaModule],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }), // Automatically loads the .env file
+    PrismaModule,
+    RestaurantsModule,
+    VotesModule,
+  ],
 })
 export class AppModule {}

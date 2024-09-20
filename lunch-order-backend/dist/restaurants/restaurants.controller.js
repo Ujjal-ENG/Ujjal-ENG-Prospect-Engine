@@ -15,17 +15,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RestaurantsController = void 0;
 const common_1 = require("@nestjs/common");
 const restaurants_service_1 = require("./restaurants.service");
-const create_restaurant_dto_1 = require("./dto/create-restaurant.dto");
 const update_restaurant_dto_1 = require("./dto/update-restaurant.dto");
 let RestaurantsController = class RestaurantsController {
     constructor(restaurantsService) {
         this.restaurantsService = restaurantsService;
     }
-    create(createRestaurantDto) {
-        return this.restaurantsService.create(createRestaurantDto);
+    async createRestaurant(name) {
+        return this.restaurantsService.createRestaurant(name);
     }
-    findAll() {
-        return this.restaurantsService.findAll();
+    async getRestaurants() {
+        return this.restaurantsService.getAllRestaurants();
     }
     findOne(id) {
         return this.restaurantsService.findOne(+id);
@@ -40,17 +39,17 @@ let RestaurantsController = class RestaurantsController {
 exports.RestaurantsController = RestaurantsController;
 __decorate([
     (0, common_1.Post)(),
-    __param(0, (0, common_1.Body)()),
+    __param(0, (0, common_1.Body)('name')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_restaurant_dto_1.CreateRestaurantDto]),
-    __metadata("design:returntype", void 0)
-], RestaurantsController.prototype, "create", null);
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], RestaurantsController.prototype, "createRestaurant", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], RestaurantsController.prototype, "findAll", null);
+    __metadata("design:returntype", Promise)
+], RestaurantsController.prototype, "getRestaurants", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),

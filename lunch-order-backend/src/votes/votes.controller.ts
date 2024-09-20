@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { VotesService } from './votes.service';
 import { CreateVoteDto } from './dto/create-vote.dto';
 import { UpdateVoteDto } from './dto/update-vote.dto';
@@ -8,13 +16,13 @@ export class VotesController {
   constructor(private readonly votesService: VotesService) {}
 
   @Post()
-  create(@Body() createVoteDto: CreateVoteDto) {
-    return this.votesService.create(createVoteDto);
+  async voteForFoodPack(@Body('foodPackId') foodPackId: number) {
+    return this.votesService.voteForFoodPack(foodPackId);
   }
 
-  @Get()
-  findAll() {
-    return this.votesService.findAll();
+  @Get('result')
+  async getDailyWinner() {
+    return this.votesService.getDailyWinner();
   }
 
   @Get(':id')

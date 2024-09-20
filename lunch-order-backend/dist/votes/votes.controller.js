@@ -15,17 +15,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.VotesController = void 0;
 const common_1 = require("@nestjs/common");
 const votes_service_1 = require("./votes.service");
-const create_vote_dto_1 = require("./dto/create-vote.dto");
 const update_vote_dto_1 = require("./dto/update-vote.dto");
 let VotesController = class VotesController {
     constructor(votesService) {
         this.votesService = votesService;
     }
-    create(createVoteDto) {
-        return this.votesService.create(createVoteDto);
+    async voteForFoodPack(foodPackId) {
+        return this.votesService.voteForFoodPack(foodPackId);
     }
-    findAll() {
-        return this.votesService.findAll();
+    async getDailyWinner() {
+        return this.votesService.getDailyWinner();
     }
     findOne(id) {
         return this.votesService.findOne(+id);
@@ -40,17 +39,17 @@ let VotesController = class VotesController {
 exports.VotesController = VotesController;
 __decorate([
     (0, common_1.Post)(),
-    __param(0, (0, common_1.Body)()),
+    __param(0, (0, common_1.Body)('foodPackId')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_vote_dto_1.CreateVoteDto]),
-    __metadata("design:returntype", void 0)
-], VotesController.prototype, "create", null);
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], VotesController.prototype, "voteForFoodPack", null);
 __decorate([
-    (0, common_1.Get)(),
+    (0, common_1.Get)('result'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], VotesController.prototype, "findAll", null);
+    __metadata("design:returntype", Promise)
+], VotesController.prototype, "getDailyWinner", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
